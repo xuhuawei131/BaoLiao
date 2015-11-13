@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.meng.main.custom.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center" >
+    
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="1dp"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/toggle_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/photoselect_pic_choose_selector"
+        android:textOff="@null"
+        android:textOn="@null" />
+
+    <ImageView
+        android:id="@+id/selected_tag"
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:padding="2dp"
+        android:src="@drawable/photoselect_pic_unsel" />
+</com.meng.main.custom.SquareLayout>

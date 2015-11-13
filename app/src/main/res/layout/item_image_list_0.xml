@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.meng.main.custom.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:id="@+id/layout_camera"
+    android:gravity="center" >
+
+    <TextView
+        android:id="@+id/text_camera"
+        android:text="相机"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:drawablePadding="5dp"
+        android:drawableTop="@drawable/a46"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</com.meng.main.custom.SquareLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:state_focused="true" android:drawable="@drawable/video_selected"/>
+    <item android:state_pressed="true" android:drawable="@drawable/video_selected"/>
+    <item android:drawable="@drawable/video_unselected"/>
+
+</selector>
+<!-- From: file:/C:/Users/Administrator/AndroidStudioProjects/BaoLiao/app/src/main/res/drawable/button_video_selector.xml -->

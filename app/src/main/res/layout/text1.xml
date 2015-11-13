@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/box"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/text_title"
+            style="@style/txt_base"
+            android:text="标题" />
+
+        <EditText
+            android:id="@+id/edit_title"
+            style="@style/edit_base" >
+        </EditText>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line_dive" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/text_content"
+            style="@style/txt_base"
+            android:layout_marginBottom="0dp"
+            android:text="内容" />
+
+        <EditText
+            android:id="@+id/edit_content"
+            style="@style/edit_base"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="5dp"
+            android:minLines="2"
+            android:singleLine="false" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line_dive" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/text_name"
+            style="@style/txt_base"
+            android:text="姓名" />
+
+        <EditText
+            android:id="@+id/edit_name"
+            style="@style/edit_base" >
+        </EditText>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/line_dive" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/text_tel"
+                style="@style/txt_base"
+                android:text="电话" />
+
+            <EditText
+                android:id="@+id/edit_tel"
+                style="@style/edit_base" >
+            </EditText>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/line_dive" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/text_categ"
+                style="@style/txt_base"
+                android:text="类别" />
+
+            <EditText
+                android:id="@+id/edit_categ"
+                style="@style/edit_base" >
+            </EditText>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/line_dive" />
+    </LinearLayout>
+
+</LinearLayout>
