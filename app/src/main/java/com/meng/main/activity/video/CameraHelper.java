@@ -12,20 +12,20 @@ import android.view.WindowManager;
 
 public class CameraHelper {
 	private Activity activity;
-	
-public CameraHelper(Activity activity){
-	this.activity=activity;
-}
-	
+
+	public CameraHelper(Activity activity){
+		this.activity=activity;
+	}
+
 	public Camera resetCameraParam(Camera camera) {
-		// 设置camera预览的角度，因为默认图片是倾斜90度的
+		// 璁剧疆camera棰勮鐨勮搴︼紝鍥犱负榛樿鍥剧墖鏄�炬枩90搴︾殑
 		camera.setDisplayOrientation(90);
 
 		Size pictureSize = null;
 		Size previewSize = null;
 		Camera.Parameters parameters = camera.getParameters();
 		parameters.setPreviewFrameRate(5);
-		// 设置旋转代码
+		// 璁剧疆鏃嬭浆浠ｇ爜
 		parameters.setRotation(90);
 		// parameters.setPictureFormat(PixelFormat.JPEG);
 
@@ -96,4 +96,5 @@ public CameraHelper(Activity activity){
 		}
 		return optimalSize;
 	}
+
 }

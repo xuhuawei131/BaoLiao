@@ -29,307 +29,296 @@ import com.meng.main.MyApplication;
 import com.meng.main.custom.MediaMetadataRetriever;
 
 
-public class CommUtils {
+public class CommUtils{
 
-	/**
-	 * 
-			* ¹¦ÄÜÃèÊö£º
-			* ·¢ËÍ¹ã²¥
-			* @author WAH-WAY(xuwahwhy@163.com)
-			* <p>´´½¨ÈÕÆÚ £º2015Äê10ÔÂ6ÈÕ ÏÂÎç10:35:47</p>
-			*
-			* @param context
-			* @param intent
-			*
-			* <p>ĞŞ¸ÄÀúÊ· £º(ĞŞ¸ÄÈË£¬ĞŞ¸ÄÊ±¼ä£¬ĞŞ¸ÄÔ­Òò/ÄÚÈİ)</p>
-	 */
-	public static void sendBroadCastReceiver(Context context,Intent intent){
-		context.sendBroadcast(intent);
-	}
-    
-    /**
-     * 
-    		* ¹¦ÄÜÃèÊö£º
-    		* ÑéÖ¤ÊÖ»úÊÇ·ñÕıÈ·
-    		* @author WAH-WAY(xuwahwhy@163.com)
-    		* <p>´´½¨ÈÕÆÚ £º2015Äê10ÔÂ12ÈÕ ÏÂÎç9:18:13</p>
-    		*
-    		* @param phone
-    		* @return
-    		*
-    		* <p>ĞŞ¸ÄÀúÊ· £º(ĞŞ¸ÄÈË£¬ĞŞ¸ÄÊ±¼ä£¬ĞŞ¸ÄÔ­Òò/ÄÚÈİ)</p>
-     */
-    public static boolean isPhoneFormat(String phone) {
-		String regExp = "^[1]([3][0-9]{1}|59|58|88|89)[0-9]{8}$";
-		Pattern p = Pattern.compile(regExp);
-		Matcher m = p.matcher(phone);
-		boolean isCorrect = m.find();// boolean
-		return isCorrect;
-	}
-    /**
-     * 
-    		* ¹¦ÄÜÃèÊö£º
-    		* ÑéÖ¤ÓÊÏäÊÇ·ñÕıÈ·
-    		* @author WAH-WAY(xuwahwhy@163.com)
-    		* <p>´´½¨ÈÕÆÚ £º2015Äê10ÔÂ12ÈÕ ÏÂÎç9:18:03</p>
-    		*
-    		* @param email
-    		* @return
-    		*
-    		* <p>ĞŞ¸ÄÀúÊ· £º(ĞŞ¸ÄÈË£¬ĞŞ¸ÄÊ±¼ä£¬ĞŞ¸ÄÔ­Òò/ÄÚÈİ)</p>
-     */
-	public static boolean isEmailFormat(String email) {
-		String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
-		Pattern regex = Pattern.compile(check);
-		Matcher matcher = regex.matcher("email");
-		boolean isMatched = matcher.matches();
-		return isMatched;
-	}
-	/***
-	 * 
-			* ¹¦ÄÜÃèÊö£º
-			* É¾³ıÎÄ¼ş¼ĞÏÂµÄËùÓĞÎÄ¼şÒÔ¼°ÎÄ¼ş¼Ğ
-			* @author WAH-WAY(xuwahwhy@163.com)
-			* <p>´´½¨ÈÕÆÚ £º2015Äê10ÔÂ12ÈÕ ÏÂÎç9:17:40</p>
-			*
-			* @param pathDir
-			*
-			* <p>ĞŞ¸ÄÀúÊ· £º(ĞŞ¸ÄÈË£¬ĞŞ¸ÄÊ±¼ä£¬ĞŞ¸ÄÔ­Òò/ÄÚÈİ)</p>
-	 */
-	public static void deletePathFiles(String pathDir) {
-		File PHOTO_DIR = new File(pathDir);
-		if (!PHOTO_DIR.exists()) {
-			return;
+		/**
+		 *
+		 * åŠŸèƒ½æè¿°ï¼š
+		 * å‘é€å¹¿æ’­
+		 * @author WAH-WAY(xuwahwhy@163.com)
+		 * <p>åˆ›å»ºæ—¥æœŸ ï¼š2015å¹´10æœˆ6æ—¥ ä¸‹åˆ10:35:47</p>
+		 *
+		 * @param context
+		 * @param intent
+		 *
+		 * <p>ä¿®æ”¹å†å² ï¼š(ä¿®æ”¹äººï¼Œä¿®æ”¹æ—¶é—´ï¼Œä¿®æ”¹åŸå› /å†…å®¹)</p>
+		 */
+		public static void sendBroadCastReceiver(Context context,Intent intent){
+			context.sendBroadcast(intent);
 		}
-		File[] files = PHOTO_DIR.listFiles();
-		if (files.length > 0) {
-			for (File f : files) {
-				if (f.isDirectory()) {
-					deletePathFiles(f.getAbsolutePath());
-				} else {
-					f.delete();
+
+		/**
+		 *
+		 * åŠŸèƒ½æè¿°ï¼š
+		 * éªŒè¯æ‰‹æœºæ˜¯å¦æ­£ç¡®
+		 * @author WAH-WAY(xuwahwhy@163.com)
+		 * <p>åˆ›å»ºæ—¥æœŸ ï¼š2015å¹´10æœˆ12æ—¥ ä¸‹åˆ9:18:13</p>
+		 *
+		 * @param phone
+		 * @return
+		 *
+		 * <p>ä¿®æ”¹å†å² ï¼š(ä¿®æ”¹äººï¼Œä¿®æ”¹æ—¶é—´ï¼Œä¿®æ”¹åŸå› /å†…å®¹)</p>
+		 */
+		public static boolean isPhoneFormat(String phone) {
+			String regExp = "^[1]([3][0-9]{1}|59|58|88|89)[0-9]{8}$";
+			Pattern p = Pattern.compile(regExp);
+			Matcher m = p.matcher(phone);
+			boolean isCorrect = m.find();// boolean
+			return isCorrect;
+		}
+		/**
+		 *
+		 * åŠŸèƒ½æè¿°ï¼š
+		 * éªŒè¯é‚®ç®±æ˜¯å¦æ­£ç¡®
+		 * @author WAH-WAY(xuwahwhy@163.com)
+		 * <p>åˆ›å»ºæ—¥æœŸ ï¼š2015å¹´10æœˆ12æ—¥ ä¸‹åˆ9:18:03</p>
+		 *
+		 * @param email
+		 * @return
+		 *
+		 * <p>ä¿®æ”¹å†å² ï¼š(ä¿®æ”¹äººï¼Œä¿®æ”¹æ—¶é—´ï¼Œä¿®æ”¹åŸå› /å†…å®¹)</p>
+		 */
+		public static boolean isEmailFormat(String email) {
+			String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+			Pattern regex = Pattern.compile(check);
+			Matcher matcher = regex.matcher("email");
+			boolean isMatched = matcher.matches();
+			return isMatched;
+		}
+		/***
+		 *
+		 * åŠŸèƒ½æè¿°ï¼š
+		 * åˆ é™¤æ–‡ä»¶å¤¹ä¸‹çš„æ‰€æœ‰æ–‡ä»¶ä»¥åŠæ–‡ä»¶å¤¹
+		 * @author WAH-WAY(xuwahwhy@163.com)
+		 * <p>åˆ›å»ºæ—¥æœŸ ï¼š2015å¹´10æœˆ12æ—¥ ä¸‹åˆ9:17:40</p>
+		 *
+		 * @param pathDir
+		 *
+		 * <p>ä¿®æ”¹å†å² ï¼š(ä¿®æ”¹äººï¼Œä¿®æ”¹æ—¶é—´ï¼Œä¿®æ”¹åŸå› /å†…å®¹)</p>
+		 */
+		public static void deletePathFiles(String pathDir) {
+			File PHOTO_DIR = new File(pathDir);
+			if (!PHOTO_DIR.exists()) {
+				return;
+			}
+			File[] files = PHOTO_DIR.listFiles();
+			if (files.length > 0) {
+				for (File f : files) {
+					if (f.isDirectory()) {
+						deletePathFiles(f.getAbsolutePath());
+					} else {
+						f.delete();
+					}
 				}
 			}
 		}
-	}
-	/**
-	 * 
-			* ¹¦ÄÜÃèÊö£º
-			* Ğ¡ÊıµãÈ¡Öµ
-			* @author WAH-WAY(xuwahwhy@163.com)
-			* <p>´´½¨ÈÕÆÚ £º2015Äê10ÔÂ12ÈÕ ÏÂÎç9:22:44</p>
-			*
-			* @param num
-			* @return
-			*
-			* <p>ĞŞ¸ÄÀúÊ· £º(ĞŞ¸ÄÈË£¬ĞŞ¸ÄÊ±¼ä£¬ĞŞ¸ÄÔ­Òò/ÄÚÈİ)</p>
-	 */
-	public static String  getPoint(float num){
-		DecimalFormat   df=new   java.text.DecimalFormat("#.##");   
-		 return df.format(num);
-	}
-	
-	/**
-	 * ÅĞ¶Ï¸¸Json¶ÔÏóÖĞÄ³Ò»¸ö×Ó¶ÔÏóÊÇ·ñÎªJsonArray
-	 * 
-	 * @param obj
-	 *            ¸¸Json¶ÔÏó
-	 * @param name
-	 *            ×Ó¶ÔÏóµÄÃû³Æ
-	 * @return
-	 */
-	public static boolean isJsonArray(String src) {
-		boolean re = true;
-		try {
-			new JSONArray(src);
-		} catch (JSONException e) {
-			re = false;
-		} finally {
-			return re;
+		/**
+		 *
+		 * åŠŸèƒ½æè¿°ï¼š
+		 * å°æ•°ç‚¹å–å€¼
+		 * @author WAH-WAY(xuwahwhy@163.com)
+		 * <p>åˆ›å»ºæ—¥æœŸ ï¼š2015å¹´10æœˆ12æ—¥ ä¸‹åˆ9:22:44</p>
+		 *
+		 * @param num
+		 * @return
+		 *
+		 * <p>ä¿®æ”¹å†å² ï¼š(ä¿®æ”¹äººï¼Œä¿®æ”¹æ—¶é—´ï¼Œä¿®æ”¹åŸå› /å†…å®¹)</p>
+		 */
+		public static String  getPoint(float num){
+			DecimalFormat   df=new   java.text.DecimalFormat("#.##");
+			return df.format(num);
 		}
-	}
-	
-	/**
-	 * ÅĞ¶ÏStringÊÇ·ñÊÇJson¸ñÊ½
-	 * @return
-	 */
-	public static boolean isJsonObject(String src) {
-		boolean re = true;
-		try {
-			new JSONObject(src);
-		} catch (JSONException e) {
-			re = false;
-		} finally {
-			return re;
-		}
-	}
-	/**
-	 * ×Ô¶¯·Ö¸îÎÄ±¾
-	 * 
-	 * @param content
-	 *            ĞèÒª·Ö¸îµÄÎÄ±¾
-	 * @param p
-	 *            »­±Ê£¬ÓÃÀ´¸ù¾İ×ÖÌå²âÁ¿ÎÄ±¾µÄ¿í¶È
-	 * @param width
-	 *            Ö¸¶¨µÄ¿í¶È
-	 * @return Ò»¸öÖ¸¶¨ĞĞ¿í¶àĞĞ×Ö·û´®
-	 */
-	public static String autoSplit(String content, TextPaint p, float width) {
-		int length = content.length();
-		float textWidth = 0;
-		textWidth = p.measureText(content);
-		if (textWidth <= width) {
-			return content;
-		}
-		StringBuffer sb = new StringBuffer();
-		int start = 0, end = 1;
-		String tempStr = "";
-		while (start < length) {
-			if (p.measureText(content, start, end) > width) { // ÎÄ±¾¿í¶È³¬³ö¿Ø¼ş¿í¶ÈÊ±
-				tempStr = (String) content.subSequence(start, end) + "\n";
-				sb.append(tempStr);
-				start = end;
-			}
-			if (end == length) { // ²»×ãÒ»ĞĞµÄÎÄ±¾
-				tempStr = (String) content.subSequence(start, end) + "\n";
-				sb.append(tempStr);
-				break;
-			}
-			end += 1;
-		}
-		return sb.toString();
-	}
-	
-	/**
-	 * ÅĞ¶Ïµ±Ç°ÊÇ·ñÓĞSD¿¨
-	 * 
-	 * @return
-	 */
-	public static boolean isSDCardExists() {
-		return android.os.Environment.getExternalStorageState().equals(
-				android.os.Environment.MEDIA_MOUNTED);
-	}
-	/**
-	 * 
-			* ¹¦ÄÜÃèÊö£º
-			* ½«Ãë×ª»¯Îª 00£º00£º00¸ñÊ½×Ö·û´®
-			* @author WAH-WAY(xuwahwhy@163.com)
-			* <p>´´½¨ÈÕÆÚ £º2015Äê10ÔÂ22ÈÕ ÏÂÎç5:15:37</p>
-			*
-			* @param count
-			* @return
-			*
-			* <p>ĞŞ¸ÄÀúÊ· £º(ĞŞ¸ÄÈË£¬ĞŞ¸ÄÊ±¼ä£¬ĞŞ¸ÄÔ­Òò/ÄÚÈİ)</p>
-	 */
-	public static String getTimeFormat(int count){
-		StringBuilder sb=new StringBuilder();
-		int hour=count/3600;
-		if(hour>9){
-			sb.append(hour);
-		}else{
-			sb.append("0");
-			sb.append(hour);
-		}
-		sb.append(":");
-		int minu=count/60;
-		if(minu>9){
-			sb.append(minu);
-		}else{
-			sb.append("0");
-			sb.append(minu);
-		}
-		sb.append(":");
-		
-		int sec=count%60;
-		if(sec>9){
-			sb.append(sec);
-		}else{
-			sb.append("0");
-			sb.append(sec);
-		}
-		return sb.toString();
-	}
-	/**
-	 * 
-			* ¹¦ÄÜÃèÊö£º
-			* ÎÄ¼ş´óĞ¡µ¥Î»
-			* @author WAH-WAY(xuwahwhy@163.com)
-			* <p>´´½¨ÈÕÆÚ £º2015Äê10ÔÂ22ÈÕ ÏÂÎç10:12:41</p>
-			*
-			* @param fileS
-			* @return
-			*
-			* <p>ĞŞ¸ÄÀúÊ· £º(ĞŞ¸ÄÈË£¬ĞŞ¸ÄÊ±¼ä£¬ĞŞ¸ÄÔ­Òò/ÄÚÈİ)</p>
-	 */
-	public static String formetFileSize(long fileS) {// ×ª»»ÎÄ¼ş´óĞ¡
-		DecimalFormat df = new DecimalFormat("#.00");
-		String fileSizeString = "";
-		if (fileS < 1024) {
-			fileSizeString = df.format((double) fileS) + "B";
-		} else if (fileS < 1048576) {
-			fileSizeString = df.format((double) fileS / 1024) + "K";
-		} else if (fileS < 1073741824) {
-			fileSizeString = df.format((double) fileS / 1048576) + "M";
-		} else {
-			fileSizeString = df.format((double) fileS / 1073741824) + "G";
-		}
-		return fileSizeString;
-	}
-	/**
-	 * 
-			* ¹¦ÄÜÃèÊö£º
-			* »ñÈ¡ÎÄ¼şµÄ´óĞ¡
-			* @author WAH-WAY(xuwahwhy@163.com)
-			* <p>´´½¨ÈÕÆÚ £º2015Äê10ÔÂ22ÈÕ ÏÂÎç10:25:57</p>
-			*
-			* @param file
-			* @return
-			*
-			* <p>ĞŞ¸ÄÀúÊ· £º(ĞŞ¸ÄÈË£¬ĞŞ¸ÄÊ±¼ä£¬ĞŞ¸ÄÔ­Òò/ÄÚÈİ)</p>
-	 */
-	public static long getFileSize(File file) {
-		long s = 0;
-		if (file != null && file.exists()) {
-			FileInputStream fis = null;
-			try {
-				fis = new FileInputStream(file);
-				s = fis.available();
-			} catch (FileNotFoundException e) {
-				
-			} catch (IOException e) {
-				
-			}
-		}
-		return s;
-	}
-	
-	/**
-	 * »ñÈ¡ÆÁÄ»µÄ¿í¸ß [0] w [1] h
-	 * */
-	public static int[] getWindowWH() {
-		int[] wh = new int[2];
-		wh[0] = MyApplication.context.getResources().getDisplayMetrics().widthPixels;
-		wh[1] = MyApplication.context.getResources().getDisplayMetrics().heightPixels;
-		return wh;
-	}
-	/**
-	 * ¸ù¾İÊÖ»úµÄ·Ö±æÂÊ´Ó dp µÄµ¥Î» ×ª³ÉÎª px(ÏñËØ)
-	 */
-	public static int dip2px(float dpValue) {
-		final float scale = MyApplication.context.getResources()
-				.getDisplayMetrics().density;
-		return (int) (dpValue * scale + 0.5f);
-	}
 
-	/**
-	 * ¸ù¾İÊÖ»úµÄ·Ö±æÂÊ´Ó px(ÏñËØ) µÄµ¥Î» ×ª³ÉÎª dp
-	 */
-	public static int px2dipfloat(float pxValue) {
-		final float scale = MyApplication.context.getResources()
-				.getDisplayMetrics().density;
-		return (int) (pxValue / scale + 0.5f);
-	}
-	
+
+		public static boolean isJsonArray(String src) {
+			boolean re = true;
+			try {
+				new JSONArray(src);
+			} catch (JSONException e) {
+				re = false;
+			} finally {
+				return re;
+			}
+		}
+
+
+		public static boolean isJsonObject(String src) {
+			boolean re = true;
+			try {
+				new JSONObject(src);
+			} catch (JSONException e) {
+				re = false;
+			} finally {
+				return re;
+			}
+		}
+		/**
+		 * è‡ªåŠ¨åˆ†å‰²æ–‡æœ¬
+		 *
+		 * @param content
+		 *            éœ€è¦åˆ†å‰²çš„æ–‡æœ¬
+		 * @param p
+		 *            ç”»ç¬”ï¼Œç”¨æ¥æ ¹æ®å­—ä½“æµ‹é‡æ–‡æœ¬çš„å®½åº¦
+		 * @param width
+		 *            æŒ‡å®šçš„å®½åº¦
+		 * @return ä¸€ä¸ªæŒ‡å®šè¡Œå®½å¤šè¡Œå­—ç¬¦ä¸²
+		 */
+		public static String autoSplit(String content, TextPaint p, float width) {
+			int length = content.length();
+			float textWidth = 0;
+			textWidth = p.measureText(content);
+			if (textWidth <= width) {
+				return content;
+			}
+			StringBuffer sb = new StringBuffer();
+			int start = 0, end = 1;
+			String tempStr = "";
+			while (start < length) {
+				if (p.measureText(content, start, end) > width) { // æ–‡æœ¬å®½åº¦è¶…å‡ºæ§ä»¶å®½åº¦æ—¶
+					tempStr = content.subSequence(start, end) + "\n";
+					sb.append(tempStr);
+					start = end;
+				}
+				if (end == length) { // ä¸è¶³ä¸€è¡Œçš„æ–‡æœ¬
+					tempStr = content.subSequence(start, end) + "\n";
+					sb.append(tempStr);
+					break;
+				}
+				end += 1;
+			}
+			return sb.toString();
+		}
+
+		/**
+		 * åˆ¤æ–­å½“å‰æ˜¯å¦æœ‰SDå¡
+		 *
+		 * @return
+		 */
+		public static boolean isSDCardExists() {
+			return android.os.Environment.getExternalStorageState().equals(
+					android.os.Environment.MEDIA_MOUNTED);
+		}
+		/**
+		 *
+		 * åŠŸèƒ½æè¿°ï¼š
+		 * å°†ç§’è½¬åŒ–ä¸º 00ï¼š00ï¼š00æ ¼å¼å­—ç¬¦ä¸²
+		 * @author WAH-WAY(xuwahwhy@163.com)
+		 * <p>åˆ›å»ºæ—¥æœŸ ï¼š2015å¹´10æœˆ22æ—¥ ä¸‹åˆ5:15:37</p>
+		 *
+		 * @param count
+		 * @return
+		 *
+		 * <p>ä¿®æ”¹å†å² ï¼š(ä¿®æ”¹äººï¼Œä¿®æ”¹æ—¶é—´ï¼Œä¿®æ”¹åŸå› /å†…å®¹)</p>
+		 */
+		public static String getTimeFormat(int count){
+			StringBuilder sb=new StringBuilder();
+			int hour=count/3600;
+			if(hour>9){
+				sb.append(hour);
+			}else{
+				sb.append("0");
+				sb.append(hour);
+			}
+			sb.append(":");
+			int minu=count/60;
+			if(minu>9){
+				sb.append(minu);
+			}else{
+				sb.append("0");
+				sb.append(minu);
+			}
+			sb.append(":");
+
+			int sec=count%60;
+			if(sec>9){
+				sb.append(sec);
+			}else{
+				sb.append("0");
+				sb.append(sec);
+			}
+			return sb.toString();
+		}
+		/**
+		 *
+		 * åŠŸèƒ½æè¿°ï¼š
+		 * æ–‡ä»¶å¤§å°å•ä½
+		 * @author WAH-WAY(xuwahwhy@163.com)
+		 * <p>åˆ›å»ºæ—¥æœŸ ï¼š2015å¹´10æœˆ22æ—¥ ä¸‹åˆ10:12:41</p>
+		 *
+		 * @param fileS
+		 * @return
+		 *
+		 * <p>ä¿®æ”¹å†å² ï¼š(ä¿®æ”¹äººï¼Œä¿®æ”¹æ—¶é—´ï¼Œä¿®æ”¹åŸå› /å†…å®¹)</p>
+		 */
+		public static String formetFileSize(long fileS) {// è½¬æ¢æ–‡ä»¶å¤§å°
+			DecimalFormat df = new DecimalFormat("#.00");
+			String fileSizeString = "";
+			if (fileS < 1024) {
+				fileSizeString = df.format((double) fileS) + "B";
+			} else if (fileS < 1048576) {
+				fileSizeString = df.format((double) fileS / 1024) + "K";
+			} else if (fileS < 1073741824) {
+				fileSizeString = df.format((double) fileS / 1048576) + "M";
+			} else {
+				fileSizeString = df.format((double) fileS / 1073741824) + "G";
+			}
+			return fileSizeString;
+		}
+		/**
+		 *
+		 * åŠŸèƒ½æè¿°ï¼š
+		 * è·å–æ–‡ä»¶çš„å¤§å°
+		 * @author WAH-WAY(xuwahwhy@163.com)
+		 * <p>åˆ›å»ºæ—¥æœŸ ï¼š2015å¹´10æœˆ22æ—¥ ä¸‹åˆ10:25:57</p>
+		 *
+		 * @param file
+		 * @return
+		 *
+		 * <p>ä¿®æ”¹å†å² ï¼š(ä¿®æ”¹äººï¼Œä¿®æ”¹æ—¶é—´ï¼Œä¿®æ”¹åŸå› /å†…å®¹)</p>
+		 */
+		public static long getFileSize(File file) {
+			long s = 0;
+			if (file != null && file.exists()) {
+				FileInputStream fis = null;
+				try {
+					fis = new FileInputStream(file);
+					s = fis.available();
+				} catch (FileNotFoundException e) {
+
+				} catch (IOException e) {
+
+				}
+			}
+			return s;
+		}
+
+		/**
+		 * è·å–å±å¹•çš„å®½é«˜ [0] w [1] h
+		 * */
+		public static int[] getWindowWH() {
+			int[] wh = new int[2];
+			wh[0] = MyApplication.context.getResources().getDisplayMetrics().widthPixels;
+			wh[1] = MyApplication.context.getResources().getDisplayMetrics().heightPixels;
+			return wh;
+		}
+		/**
+		 * æ ¹æ®æ‰‹æœºçš„åˆ†è¾¨ç‡ä» dp çš„å•ä½ è½¬æˆä¸º px(åƒç´ )
+		 */
+		public static int dip2px(float dpValue) {
+			final float scale = MyApplication.context.getResources()
+					.getDisplayMetrics().density;
+			return (int) (dpValue * scale + 0.5f);
+		}
+
+		/**
+		 * æ ¹æ®æ‰‹æœºçš„åˆ†è¾¨ç‡ä» px(åƒç´ ) çš„å•ä½ è½¬æˆä¸º dp
+		 */
+		public static int px2dipfloat(float pxValue) {
+			final float scale = MyApplication.context.getResources()
+					.getDisplayMetrics().density;
+			return (int) (pxValue / scale + 0.5f);
+		}
+
 //	public static Bitmap createVideoThumbnail(String filePath) {
 //        Bitmap bitmap = null;
 //        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
@@ -350,14 +339,15 @@ public class CommUtils {
 //        }
 //        return bitmap;
 //    }
-	
-	public static Bitmap getVideoThumbnail(String videoPath, int width, int height) {  
-        Bitmap bitmap = null;  
-        // »ñÈ¡ÊÓÆµµÄËõÂÔÍ¼  
-        bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, MediaStore.Images.Thumbnails.MICRO_KIND);  
-        bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,  
-                ThumbnailUtils.OPTIONS_RECYCLE_INPUT);  
-        return bitmap;  
-    }  
-	
+
+		public static Bitmap getVideoThumbnail(String videoPath, int width, int height) {
+			Bitmap bitmap = null;
+			// è·å–è§†é¢‘çš„ç¼©ç•¥å›¾
+			bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, MediaStore.Images.Thumbnails.MICRO_KIND);
+			bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
+					ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
+			return bitmap;
+		}
+
+
 }

@@ -19,8 +19,6 @@
 ======`-.____`-.___\_____/___.-`____.-'======
                    `=---='
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-         ·ğ×æ±£ÓÓ       ÓÀÎŞBUG
- * PlayVideoActivity.java V1.0 2015-10-30 ÏÂÎç3:44:37
  *
  * Copyright JIAYUAN Co. ,Ltd. All rights reserved.
  *
@@ -57,7 +55,7 @@ import com.meng.main.utils.CommUtils;
 
 public class PlayVideoActivity extends Activity implements OnClickListener,
 SurfaceHolder.Callback{
-	private SurfaceView surfaceView;// ÏÔÊ¾ÊÓÆµµÄ¿Ø¼ş
+	private SurfaceView surfaceView;// æ˜¾ç¤ºè§†é¢‘çš„æ§ä»¶
 	private MediaPlayer mediaPlayer;
 	private File filename;
 	private TextView text_size;
@@ -86,10 +84,10 @@ SurfaceHolder.Callback{
 		text_size = (TextView) findViewById(R.id.text_size);
 
 		surfaceView = (SurfaceView)findViewById(R.id.video_surfaceView);
-		// surfaceView.getHolder().setFixedSize(176, 144);//ÉèÖÃ·Ö±æÂÊ
+		// surfaceView.getHolder().setFixedSize(176, 144);//è®¾ç½®åˆ†è¾¨ç‡
 		surfaceHolder=surfaceView.getHolder();
-//		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);// ÉèÖÃsurfaceview²»Î¬»¤×Ô¼ºµÄ»º³åÇø£¬¶øÊÇµÈ´ıÆÁÄ»µÄäÖÈ¾ÒıÇæ½«ÄÚÈİÍÆËÍµ½ÓÃ»§ÃæÇ°
-		surfaceHolder.addCallback(this);// ¶Ôsurface¶ÔÏóµÄ×´Ì¬½øĞĞ¼àÌı
+//		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);// è®¾ç½®surfaceviewä¸ç»´æŠ¤è‡ªå·±çš„ç¼“å†²åŒºï¼Œè€Œæ˜¯ç­‰å¾…å±å¹•çš„æ¸²æŸ“å¼•æ“å°†å†…å®¹æ¨é€åˆ°ç”¨æˆ·é¢å‰
+		surfaceHolder.addCallback(this);// å¯¹surfaceå¯¹è±¡çš„çŠ¶æ€è¿›è¡Œç›‘å¬
 
 		image_play.setOnClickListener(this);
 //		Uri uri=Uri.fromFile(filename);
@@ -105,43 +103,44 @@ SurfaceHolder.Callback{
 	// ----------------------------------------
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
+							   int height) {
 	}
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		
+
 	}
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		if (mediaPlayer != null && mediaPlayer.isPlaying()) { 
-			mediaPlayer.stop(); 
-			}
+		if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+			mediaPlayer.stop();
+		}
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.image_play:
-			image_cover.setVisibility(View.GONE);
-			if (mediaPlayer!=null&&mediaPlayer.isPlaying()) {
-				 mediaPlayer.stop();
-			} else {
-				playVideo();
-			}
-			break;
+			case R.id.image_play:
+				image_cover.setVisibility(View.GONE);
+				if (mediaPlayer!=null&&mediaPlayer.isPlaying()) {
+					mediaPlayer.stop();
+				} else {
+					playVideo();
+				}
+				break;
 		}
 	}
-private void playVideo(){
-	mediaPlayer= new MediaPlayer();
-    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);//ÉèÖÃÒôÀÖÁ÷µÄÀàĞÍ
-    mediaPlayer.setDisplay(surfaceView.getHolder());//ÉèÖÃvideoÓ°Æ¬ÒÔsurfaceviewholder²¥·Å
-    try {
-		mediaPlayer.setDataSource(filename.getAbsolutePath());
-		mediaPlayer.prepare();//»º³å
-		mediaPlayer.start();//²¥·Å
-	} catch (IOException e) {
-		e.printStackTrace();
+	private void playVideo(){
+		mediaPlayer= new MediaPlayer();
+		mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);//è®¾ç½®éŸ³ä¹æµçš„ç±»å‹
+		mediaPlayer.setDisplay(surfaceView.getHolder());//è®¾ç½®videoå½±ç‰‡ä»¥surfaceviewholderæ’­æ”¾
+		try {
+			mediaPlayer.setDataSource(filename.getAbsolutePath());
+			mediaPlayer.prepare();//ç¼“å†²
+			mediaPlayer.start();//æ’­æ”¾
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-}
+
 }

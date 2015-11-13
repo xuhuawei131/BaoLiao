@@ -12,15 +12,15 @@ public class SupportedSizesReflect {
 	private static Method Parameters_getSupportedPictureSizes = null;
 	static {
 		initCompatibility();
-	};
+	}
 
 	private static void initCompatibility() {
 		try {
 			Parameters_getSupportedPreviewSizes = Camera.Parameters.class.getMethod(
-					"getSupportedPreviewSizes", new Class[] {});
+					"getSupportedPreviewSizes");
 
 			Parameters_getSupportedPictureSizes = Camera.Parameters.class.getMethod(
-					"getSupportedPictureSizes", new Class[] {});
+					"getSupportedPictureSizes");
 
 		} catch (NoSuchMethodException nsme) {
 			nsme.printStackTrace();
@@ -29,9 +29,9 @@ public class SupportedSizesReflect {
 	}
 
 	/**
-	 * Android 2.1之后有效
+	 * Android 2.1涔嬪悗鏈夋晥
 	 * @param p
-	 * @return Android1.x返回null
+	 * @return Android1.x杩斿洖null
 	 */
 	public static List<Size> getSupportedPreviewSizes(Camera.Parameters p) {
 		return getSupportedSizes(p, Parameters_getSupportedPreviewSizes);
@@ -39,7 +39,7 @@ public class SupportedSizesReflect {
 
 	public static List<Size> getSupportedPictureSizes(Camera.Parameters p){
 		return getSupportedSizes(p, Parameters_getSupportedPictureSizes);
-	}	
+	}
 
 	@SuppressWarnings("unchecked")
 	private static List<Size> getSupportedSizes(Camera.Parameters p, Method method){
@@ -62,6 +62,7 @@ public class SupportedSizesReflect {
 			return null;
 		}
 	}
+
 
 
 }

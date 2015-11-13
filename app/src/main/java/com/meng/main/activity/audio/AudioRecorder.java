@@ -17,25 +17,28 @@ import android.widget.Toast;
 
 public class AudioRecorder implements Runnable,OnErrorListener{
 	private static final int  RECODER_STATUS_COUNT=0;
-	
+
 	private static final int RECODER_STAUTS_SHORT=1;
 	private static final int RECODER_STAUTS_END=2;
 	private static final int RECODER_STAUTS_CANCEL=3;
 	private static final int RECODER_STAUTS_RECODER_FAIL=4;
-	
-	private File audioFile;
-	private int RECORD_MAX_TIME=61;
+
+	private File audioFile;//录音的文件
+	private int RECORD_MAX_TIME=61;//毫秒 最长录取时间1分钟 多出来的一秒是不计入的
+	//单声道
 	public static final int AUDIO_CHANNEL_SINGLE = 1;
+	//多声道/双声道
 	public static final int AUDIO_CHANNEL_MORE = 2;
 	private MediaRecorder recorder;
 	private OnRecoderAudioListener listener;
 	private static AudioRecorder self;
+	/**0表示停止  1表示正在运行  2表示取消 3表示已经达到最大的时间限制**/
 	public int status=0;
 	public int count=0;//
 	private Context context;
 	private AudioRecorder() {
 		context=MyApplication.context;
-	};
+	}
 
 	public static AudioRecorder getInstance() {
 		if (self == null) {
@@ -50,20 +53,20 @@ public class AudioRecorder implements Runnable,OnErrorListener{
 			record(listener);
 		}catch(Exception e){
 			if(listener!=null){
-				listener.onRecoderAudioError(2, "¼����ʼ��ʧ��");
+				listener.onRecoderAudioError(2, "录音初始化失败");
 			}
 		}
 	}
 
-	
+
 	private void record(OnRecoderAudioListener newlistener)
 			throws IllegalStateException, IOException {
 		releaseRecoder();
 		muteAudioFocus(true);
-		
+
 		listener=newlistener;
 		audioFile = new File(FileConstants.getAudioDir(),System.currentTimeMillis()+".amr");
-		
+
 		if (audioFile.exists()) {
 			audioFile.delete();
 		}
@@ -84,16 +87,16 @@ public class AudioRecorder implements Runnable,OnErrorListener{
 //		new Thread(this).start();
 	}
 	/**
-	 * 
-			* ����������
-			* �Ƿ�ر���������Ƶ
-			* @author WAH-WAY(xuwahwhy@163.com)
-			* <p>�������� ��2015��10��20�� ����2:16:13</p>
-			*
-			* @param bMute
-			* @return
-			*
-			* <p>�޸���ʷ ��(�޸��ˣ��޸�ʱ�䣬�޸�ԭ��/����)</p>
+	 *
+	 * 功能描述：
+	 * 是否关闭其他的音频
+	 * @author WAH-WAY(xuwahwhy@163.com)
+	 * <p>创建日期 ：2015年10月20日 下午2:16:13</p>
+	 *
+	 * @param bMute
+	 * @return
+	 *
+	 * <p>修改历史 ：(修改人，修改时间，修改原因/内容)</p>
 	 */
 	public static boolean muteAudioFocus(boolean bMute) {
 		Context context=MyApplication.context;
@@ -108,59 +111,49 @@ public class AudioRecorder implements Runnable,OnErrorListener{
 		}
 		return bool;
 	}
-	
-	
-	/**
-	 * 
-			* ����������
-			* �ر�¼��
-			* @author WAH-WAY(xuwahwhy@163.com)
-			* <p>�������� ��2015��10��20�� ����2:09:24</p>
-			*
-			* @param isRestart
-			*
-			* <p>�޸���ʷ ��(�޸��ˣ��޸�ʱ�䣬�޸�ԭ��/����)</p>
-	 */
+
+
+
 	public void stopRecord() {
 		status= 0;
 	}
 	/**
-	 * 
-			* ����������
-			* ȡ��¼��
-			* @author WAH-WAY(xuwahwhy@163.com)
-			* <p>�������� ��2015��10��20�� ����2:15:51</p>
-			*
-			*
-			* <p>�޸���ʷ ��(�޸��ˣ��޸�ʱ�䣬�޸�ԭ��/����)</p>
+	 *
+	 * 功能描述：
+	 * 取消录音
+	 * @author WAH-WAY(xuwahwhy@163.com)
+	 * <p>创建日期 ：2015年10月20日 下午2:15:51</p>
+	 *
+	 *
+	 * <p>修改历史 ：(修改人，修改时间，修改原因/内容)</p>
 	 */
 	public void cancleRecod() {
 		status= 2;
 		handler.sendEmptyMessage(RECODER_STAUTS_CANCEL);
 	}
-	
+
 	public boolean isRecoding(){
 		return status==1;
 	}
-	
+
 	public interface OnRecoderAudioListener{
 		/**
-		 * 
-				* ����������
-				* 
-				* @author WAH-WAY(xuwahwhy@163.com)
-				* <p>�������� ��2015��10��19�� ����3:27:29</p>
-				*
-				* @param file
-				* @param duringTime
-				*
-				* <p>�޸���ʷ ��(�޸��ˣ��޸�ʱ�䣬�޸�ԭ��/����)</p>
+		 *
+		 * 功能描述：
+		 *
+		 * @author WAH-WAY(xuwahwhy@163.com)
+		 * <p>创建日期 ：2015年10月19日 下午3:27:29</p>
+		 *
+		 * @param file
+		 * @param duringTime
+		 *
+		 * <p>修改历史 ：(修改人，修改时间，修改原因/内容)</p>
 		 */
-		public void OnRecoderSoundComplete(File file,int duringTime);
-		public void onCountChange(int count);
-		public void onRecoderAudioError(int code,String msg);
+		void OnRecoderSoundComplete(File file, int duringTime);
+		void onCountChange(int count);
+		void onRecoderAudioError(int code, String msg);
 	}
-	
+
 	@Override
 	public void onError(MediaRecorder mr, int what, int extra) {
 		status=2;
@@ -180,26 +173,26 @@ public class AudioRecorder implements Runnable,OnErrorListener{
 			try{
 				Thread.sleep(1000);
 			}catch(Exception e){
-				
+
 			}
 		}
 		switch(status){
-		case 0://������ֹͣ
-			if(count<3){
-				handler.sendEmptyMessage(RECODER_STAUTS_SHORT);
-			}else{
+			case 0://正常的停止
+				if(count<3){
+					handler.sendEmptyMessage(RECODER_STAUTS_SHORT);
+				}else{
+					handler.sendEmptyMessage(RECODER_STAUTS_END);
+				}
+				break;
+			case 2://取消录音
+				handler.sendEmptyMessage(RECODER_STAUTS_CANCEL);
+				break;
+			case 3://最大值
 				handler.sendEmptyMessage(RECODER_STAUTS_END);
-			}
-			break;
-		case 2://ȡ��¼��
-			handler.sendEmptyMessage(RECODER_STAUTS_CANCEL);
-			break;
-		case 3://���ֵ
-			handler.sendEmptyMessage(RECODER_STAUTS_END);
-			break;
+				break;
 		}
-		
-		
+
+
 	}
 	private void releaseRecoder(){
 		if (recorder != null) {
@@ -210,15 +203,15 @@ public class AudioRecorder implements Runnable,OnErrorListener{
 		}
 	}
 	/**
-	 * 
-			* ����������
-			* ��ȡ��ǰ����ֵ
-			* @author ��ά(WAH-WAY)
-			* <p>�������� ��2015-10-27 ����4:10:51</p>
-			*
-			* @return
-			*
-			* <p>�޸���ʷ ��(�޸��ˣ��޸�ʱ�䣬�޸�ԭ��/����)</p>
+	 *
+	 * 功能描述：
+	 * 获取当前音量值
+	 * @author 许华维(WAH-WAY)
+	 * <p>创建日期 ：2015-10-27 下午4:10:51</p>
+	 *
+	 * @return
+	 *
+	 * <p>修改历史 ：(修改人，修改时间，修改原因/内容)</p>
 	 */
 	public int getCurrentVolume(){
 		if(recorder!=null){
@@ -226,55 +219,56 @@ public class AudioRecorder implements Runnable,OnErrorListener{
 		}else{
 			return 0;
 		}
-		
+
 	}
-	
+
 	private Handler handler=new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			int what=msg.what;
 			if(listener==null){
-				Toast.makeText(context, "û�����ûص�", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "没有设置回调", Toast.LENGTH_SHORT).show();
 				return;
 			}
 			switch(what){
-			case RECODER_STATUS_COUNT:
-				listener.onCountChange(count);
-				break;
-			case RECODER_STAUTS_END:
-				releaseRecoder();
-				muteAudioFocus(false);
-				listener.OnRecoderSoundComplete(audioFile, count);
-				audioFile=null;
-				count=0;
-				break;
-			case RECODER_STAUTS_RECODER_FAIL:
-				count = 0;
-				releaseRecoder();
-				muteAudioFocus(false);
-				if(audioFile!=null&&audioFile.exists()){
-					audioFile.delete();
-				}
-				listener.onRecoderAudioError(3, "¼�������쳣");
-			case RECODER_STAUTS_SHORT:
-				count = 0;
-				releaseRecoder();
-				muteAudioFocus(false);
-				if(audioFile!=null&&audioFile.exists()){
-					audioFile.delete();
-				}
-				listener.onRecoderAudioError(3, "¼ȡʱ��̫��");
-			case RECODER_STAUTS_CANCEL:
-				count = 0;
-				releaseRecoder();
-				muteAudioFocus(false);
-				if(audioFile!=null&&audioFile.exists()){
-					audioFile.delete();
-				}
-				break;
+				case RECODER_STATUS_COUNT:
+					listener.onCountChange(count);
+					break;
+				case RECODER_STAUTS_END:
+					releaseRecoder();
+					muteAudioFocus(false);
+					listener.OnRecoderSoundComplete(audioFile, count);
+					audioFile=null;
+					count=0;
+					break;
+				case RECODER_STAUTS_RECODER_FAIL:
+					count = 0;
+					releaseRecoder();
+					muteAudioFocus(false);
+					if(audioFile!=null&&audioFile.exists()){
+						audioFile.delete();
+					}
+					listener.onRecoderAudioError(3, "录音出现异常");
+				case RECODER_STAUTS_SHORT:
+					count = 0;
+					releaseRecoder();
+					muteAudioFocus(false);
+					if(audioFile!=null&&audioFile.exists()){
+						audioFile.delete();
+					}
+					listener.onRecoderAudioError(3, "录取时间太短");
+				case RECODER_STAUTS_CANCEL:
+					count = 0;
+					releaseRecoder();
+					muteAudioFocus(false);
+					if(audioFile!=null&&audioFile.exists()){
+						audioFile.delete();
+					}
+					break;
 			}
 		}
 	};
-	
+
+
 }

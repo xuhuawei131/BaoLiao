@@ -19,8 +19,6 @@
 ======`-.____`-.___\_____/___.-`____.-'======
                    `=---='
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-         ·ğ×æ±£ÓÓ       ÓÀÎŞBUG
-* VideoActivity.java V1.0 2015-10-26 ÏÂÎç5:27:05
 *
 * Copyright JIAYUAN Co. ,Ltd. All rights reserved.
 *
@@ -57,16 +55,16 @@ import com.meng.main.constants.FileConstants;
 import com.meng.main.utils.CommUtils;
 @SuppressLint("NewApi")
 public class VideoActivity extends Activity implements 	SurfaceHolder.Callback,OnClickListener,Runnable{
-	private MediaRecorder mediarecorder;// Â¼ÖÆÊÓÆµµÄÀà
-	private SurfaceView surfaceview;// ÏÔÊ¾ÊÓÆµµÄ¿Ø¼ş
+	private MediaRecorder mediarecorder;// å½•åˆ¶è§†é¢‘çš„ç±»
+	private SurfaceView surfaceview;// æ˜¾ç¤ºè§†é¢‘çš„æ§ä»¶
 	private  Camera camera;
-	/**ÊµÏÖÕâ¸ö½Ó¿ÚµÄCallback½Ó¿Ú**/
+	/**å®ç°è¿™ä¸ªæ¥å£çš„Callbackæ¥å£**/
 	private SurfaceHolder surfaceHolder;
-	/**ÊÇ·ñÊÇºóÖÃÉãÏñÍ·**/
+	/**æ˜¯å¦æ˜¯åç½®æ‘„åƒå¤´**/
 	private boolean isCameraBack=true;
-	/**ÊÇ·ñÕıÔÚÂ¼ÖÆtrueÂ¼ÖÆÖĞ falseÎ´Â¼ÖÆ*/
+	/**æ˜¯å¦æ­£åœ¨å½•åˆ¶trueå½•åˆ¶ä¸­ falseæœªå½•åˆ¶*/
 	private boolean isRecord=false;
-	/**0´ú±íÇ°ÖÃÉãÏñÍ·£¬1´ú±íºóÖÃÉãÏñÍ·**/
+	/**0ä»£è¡¨å‰ç½®æ‘„åƒå¤´ï¼Œ1ä»£è¡¨åç½®æ‘„åƒå¤´**/
 	private int cameraPosition = 1;
 	private CameraHelper helper;
 	private ImageButton image_camera;
@@ -80,27 +78,27 @@ public class VideoActivity extends Activity implements 	SurfaceHolder.Callback,O
 		helper=new CameraHelper(this);
 		setContentView(R.layout.activity_video_recoder);
 		findViewById();
-		
+
 	}
 	private void findViewById(){
 		image_exchange=(ImageButton)findViewById(R.id.image_exchange);
 		image_camera=(ImageButton)findViewById(R.id.image_camera);
 		text_count=(TextView)findViewById(R.id.text_count);
 		surfaceview = (SurfaceView) findViewById(R.id.surfaceView);
-		
+
 		View btn_next=findViewById(R.id.btn_next);
 		View btn_cancle=findViewById(R.id.btn_cancel);
-		
+
 		btn_next.setOnClickListener(this);
 		btn_cancle.setOnClickListener(this);
-		
+
 		image_camera.setOnClickListener(this);
 		image_exchange.setOnClickListener(this);
-		
-		SurfaceHolder holder = surfaceview.getHolder();// È¡µÃholder
-		holder.addCallback(this); // holder¼ÓÈë»Øµ÷½Ó¿Ú
-		holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);//setType±ØĞëÉèÖÃ£¬Òª²»³ö´í.
-		
+
+		SurfaceHolder holder = surfaceview.getHolder();// å–å¾—holder
+		holder.addCallback(this); // holderåŠ å…¥å›è°ƒæ¥å£
+		holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);//setTypeå¿…é¡»è®¾ç½®ï¼Œè¦ä¸å‡ºé”™.
+
 	}
 	@Override
 	public void run() {
@@ -111,54 +109,54 @@ public class VideoActivity extends Activity implements 	SurfaceHolder.Callback,O
 				Thread.sleep(1000);
 				count++;
 			}catch(Exception e){
-				
+
 			}
 		}
 		handler.sendEmptyMessage(-1);
-	
+
 	}
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()){
-		case R.id.image_exchange:
-			exchangeCameraFace();
-			break;
-		case R.id.image_camera:
-			startOrStopRecod();
-			break;
-		case R.id.btn_next:
-			if(videoFile!=null&&videoFile.exists()){
-				Intent intent=new Intent(this,PlayVideoActivity.class);
-				intent.putExtra("filePath", videoFile.getAbsolutePath());
-				startActivity(intent);
+			case R.id.image_exchange:
+				exchangeCameraFace();
+				break;
+			case R.id.image_camera:
+				startOrStopRecod();
+				break;
+			case R.id.btn_next:
+				if(videoFile!=null&&videoFile.exists()){
+					Intent intent=new Intent(this,PlayVideoActivity.class);
+					intent.putExtra("filePath", videoFile.getAbsolutePath());
+					startActivity(intent);
+					finish();
+				}else{
+					Toast.makeText(this, "è¯·å½•åˆ¶è§†é¢‘", Toast.LENGTH_LONG).show();
+				}
+
+				break;
+			case R.id.btn_cancel:
 				finish();
-			}else{
-				Toast.makeText(this, "ÇëÂ¼ÖÆÊÓÆµ", Toast.LENGTH_LONG).show();
-			}
-			
-			break;
-		case R.id.btn_cancel:
-			finish();
-			break;
+				break;
 		}
-	
+
 	}
-	
+
 	private void startOrStopRecod(){
-		if(isRecord){//Èç¹ûÊÓÆµÕıÔÚÂ¼ÖÆ ÄÇÃ´¾ÍÍ£Ö¹Â¼ÖÆ
+		if(isRecord){//å¦‚æœè§†é¢‘æ­£åœ¨å½•åˆ¶ é‚£ä¹ˆå°±åœæ­¢å½•åˆ¶
 			isRecord=false;
 			image_camera.setImageResource(R.drawable.start);
 			if (mediarecorder != null) {
-				// Í£Ö¹Â¼ÖÆ
+				// åœæ­¢å½•åˆ¶
 				mediarecorder.stop();
-				// ÊÍ·Å×ÊÔ´
+				// é‡Šæ”¾èµ„æº
 				mediarecorder.release();
 				mediarecorder = null;
 			}
 			if(camera!=null){
 				camera.release();
 			}
-		}else{//Èç¹ûÊÓÆµÃ»ÓĞÂ¼ÖÆ ÄÇÃ´¾Í¿ªÊ¼Â¼ÖÆ
+		}else{//å¦‚æœè§†é¢‘æ²¡æœ‰å½•åˆ¶ é‚£ä¹ˆå°±å¼€å§‹å½•åˆ¶
 			isRecord=true;
 			image_camera.setImageResource(R.drawable.stop);
 			mediarecorder = new MediaRecorder();
@@ -167,38 +165,38 @@ public class VideoActivity extends Activity implements 	SurfaceHolder.Callback,O
 				camera=null;
 			}
 			if(cameraPosition==1){
-				camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);//´ò¿ªÉãÏñÍ·
-		         camera=helper.resetCameraParam(camera);
-		         mediarecorder.setOrientationHint(90);//ÊÓÆµĞı×ª90¶È
+				camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);//æ‰“å¼€æ‘„åƒå¤´
+				camera=helper.resetCameraParam(camera);
+				mediarecorder.setOrientationHint(90);//è§†é¢‘æ—‹è½¬90åº¦
 			}else{
-				 camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);//´ò¿ªÉãÏñÍ·
-		         Camera.Parameters parameters = camera.getParameters();
-		         camera.setDisplayOrientation(90);
-		         camera.setParameters(parameters); 
-				 mediarecorder.setOrientationHint(270);//ÊÓÆµĞı×ª90¶È
+				camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);//æ‰“å¼€æ‘„åƒå¤´
+				Camera.Parameters parameters = camera.getParameters();
+				camera.setDisplayOrientation(90);
+				camera.setParameters(parameters);
+				mediarecorder.setOrientationHint(270);//è§†é¢‘æ—‹è½¬90åº¦
 			}
-		    camera.unlock();
-		    mediarecorder.setCamera(camera);
-			
-			// ÉèÖÃÂ¼ÖÆÊÓÆµÔ´ÎªCamera(Ïà»ú)
+			camera.unlock();
+			mediarecorder.setCamera(camera);
+
+			// è®¾ç½®å½•åˆ¶è§†é¢‘æºä¸ºCamera(ç›¸æœº)
 			mediarecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-			// ÉèÖÃÂ¼ÖÆÍê³ÉºóÊÓÆµµÄ·â×°¸ñÊ½THREE_GPPÎª3gp.MPEG_4Îªmp4
+			// è®¾ç½®å½•åˆ¶å®Œæˆåè§†é¢‘çš„å°è£…æ ¼å¼THREE_GPPä¸º3gp.MPEG_4ä¸ºmp4
 			mediarecorder
 					.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-			// ÉèÖÃÂ¼ÖÆµÄÊÓÆµ±àÂëh263 h264
+			// è®¾ç½®å½•åˆ¶çš„è§†é¢‘ç¼–ç h263 h264
 			mediarecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
-			// ÉèÖÃÊÓÆµÂ¼ÖÆµÄ·Ö±æÂÊ¡£±ØĞë·ÅÔÚÉèÖÃ±àÂëºÍ¸ñÊ½µÄºóÃæ£¬·ñÔò±¨´í
+			// è®¾ç½®è§†é¢‘å½•åˆ¶çš„åˆ†è¾¨ç‡ã€‚å¿…é¡»æ”¾åœ¨è®¾ç½®ç¼–ç å’Œæ ¼å¼çš„åé¢ï¼Œå¦åˆ™æŠ¥é”™
 			mediarecorder.setVideoSize(640, 480);//176, 144
 			mediarecorder.setMaxDuration(1800000);
-			//176X144,320X240,640X480,1280¡Á720,1929X1080
-			// ÉèÖÃÂ¼ÖÆµÄÊÓÆµÖ¡ÂÊ¡£±ØĞë·ÅÔÚÉèÖÃ±àÂëºÍ¸ñÊ½µÄºóÃæ£¬·ñÔò±¨´í
-	//				mediarecorder.setVideoFrameRate(15);
+			//176X144,320X240,640X480,1280Ã—720,1929X1080
+			// è®¾ç½®å½•åˆ¶çš„è§†é¢‘å¸§ç‡ã€‚å¿…é¡»æ”¾åœ¨è®¾ç½®ç¼–ç å’Œæ ¼å¼çš„åé¢ï¼Œå¦åˆ™æŠ¥é”™
+			//				mediarecorder.setVideoFrameRate(15);
 			mediarecorder.setPreviewDisplay(surfaceHolder.getSurface());
-			// ÉèÖÃÊÓÆµÎÄ¼şÊä³öµÄÂ·¾¶
+			// è®¾ç½®è§†é¢‘æ–‡ä»¶è¾“å‡ºçš„è·¯å¾„
 			videoFile=new File(FileConstants.getVideoDir(),System.currentTimeMillis()+".mp4");
 			mediarecorder.setOutputFile(videoFile.getAbsolutePath());
 			try {
-				// ×¼±¸Â¼ÖÆ
+				// å‡†å¤‡å½•åˆ¶
 				mediarecorder.prepare();
 				mediarecorder.start();
 			} catch (IllegalStateException e) {
@@ -207,59 +205,55 @@ public class VideoActivity extends Activity implements 	SurfaceHolder.Callback,O
 				e.printStackTrace();
 			}
 		}
-		new Thread(this).start();;
+		new Thread(this).start();
 	}
 	/**
-	 * 
-			* ¹¦ÄÜÃèÊö£º
-			* ÇĞ»»Ç°ºóÉãÏñÍ·
-			* @author WAH-WAY(xuwahwhy@163.com)
-			* <p>´´½¨ÈÕÆÚ £º2015Äê10ÔÂ22ÈÕ ÏÂÎç4:31:33</p>
-			*
-			*
-			* <p>ĞŞ¸ÄÀúÊ· £º(ĞŞ¸ÄÈË£¬ĞŞ¸ÄÊ±¼ä£¬ĞŞ¸ÄÔ­Òò/ÄÚÈİ)</p>
+	 *
+	 * åŠŸèƒ½æè¿°ï¼š
+	 * åˆ‡æ¢å‰åæ‘„åƒå¤´
+	 * @author WAH-WAY(xuwahwhy@163.com)
+	 * <p>åˆ›å»ºæ—¥æœŸ ï¼š2015å¹´10æœˆ22æ—¥ ä¸‹åˆ4:31:33</p>
+	 *
+	 *
+	 * <p>ä¿®æ”¹å†å² ï¼š(ä¿®æ”¹äººï¼Œä¿®æ”¹æ—¶é—´ï¼Œä¿®æ”¹åŸå› /å†…å®¹)</p>
 	 */
 	@SuppressLint("NewApi")
 	private void exchangeCameraFace() {
-		if (isCameraBack) {
-			isCameraBack = false;
-		} else {
-			isCameraBack = true;
-		}
+		isCameraBack = !isCameraBack;
 		int cameraCount = 0;
 		CameraInfo cameraInfo = new CameraInfo();
-		cameraCount = Camera.getNumberOfCameras();// µÃµ½ÉãÏñÍ·µÄ¸öÊı
+		cameraCount = Camera.getNumberOfCameras();// å¾—åˆ°æ‘„åƒå¤´çš„ä¸ªæ•°
 		for (int i = 0; i < cameraCount; i++) {
-			Camera.getCameraInfo(i, cameraInfo);// µÃµ½Ã¿Ò»¸öÉãÏñÍ·µÄĞÅÏ¢
+			Camera.getCameraInfo(i, cameraInfo);// å¾—åˆ°æ¯ä¸€ä¸ªæ‘„åƒå¤´çš„ä¿¡æ¯
 			if (cameraPosition == 1) {
-				// ÏÖÔÚÊÇºóÖÃ£¬±ä¸üÎªÇ°ÖÃ
-				if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {// ´ú±íÉãÏñÍ·µÄ·½Î»£¬CAMERA_FACING_FRONTÇ°ÖÃ
-																					// CAMERA_FACING_BACKºóÖÃ
-					camera.stopPreview();// Í£µôÔ­À´ÉãÏñÍ·µÄÔ¤ÀÀ
-					camera.release();// ÊÍ·Å×ÊÔ´
-					camera = null;// È¡ÏûÔ­À´ÉãÏñÍ·
-					camera = Camera.open(i);// ´ò¿ªµ±Ç°Ñ¡ÖĞµÄÉãÏñÍ·
+				// ç°åœ¨æ˜¯åç½®ï¼Œå˜æ›´ä¸ºå‰ç½®
+				if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {// ä»£è¡¨æ‘„åƒå¤´çš„æ–¹ä½ï¼ŒCAMERA_FACING_FRONTå‰ç½®
+					// CAMERA_FACING_BACKåç½®
+					camera.stopPreview();// åœæ‰åŸæ¥æ‘„åƒå¤´çš„é¢„è§ˆ
+					camera.release();// é‡Šæ”¾èµ„æº
+					camera = null;// å–æ¶ˆåŸæ¥æ‘„åƒå¤´
+					camera = Camera.open(i);// æ‰“å¼€å½“å‰é€‰ä¸­çš„æ‘„åƒå¤´
 					try {
 						helper.resetCameraParam(camera);
-						camera.setPreviewDisplay(surfaceHolder);// Í¨¹ısurfaceviewÏÔÊ¾È¡¾°»­Ãæ
-						camera.startPreview();// ¿ªÊ¼Ô¤ÀÀ
+						camera.setPreviewDisplay(surfaceHolder);// é€šè¿‡surfaceviewæ˜¾ç¤ºå–æ™¯ç”»é¢
+						camera.startPreview();// å¼€å§‹é¢„è§ˆ
 						cameraPosition = 0;
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 					break;
 				}
-			} else { // ÏÖÔÚÊÇÇ°ÖÃ£¬ ±ä¸üÎªºóÖÃ
-				if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {// ´ú±íÉãÏñÍ·µÄ·½Î»£¬CAMERA_FACING_FRONTÇ°ÖÃ
-																				// CAMERA_FACING_BACKºóÖÃ
-					camera.stopPreview();// Í£µôÔ­À´ÉãÏñÍ·µÄÔ¤ÀÀ
-					camera.release();// ÊÍ·Å×ÊÔ´
-					camera = null;// È¡ÏûÔ­À´ÉãÏñÍ·
-					camera = Camera.open(i);// ´ò¿ªµ±Ç°Ñ¡ÖĞµÄÉãÏñÍ·
+			} else { // ç°åœ¨æ˜¯å‰ç½®ï¼Œ å˜æ›´ä¸ºåç½®
+				if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {// ä»£è¡¨æ‘„åƒå¤´çš„æ–¹ä½ï¼ŒCAMERA_FACING_FRONTå‰ç½®
+					// CAMERA_FACING_BACKåç½®
+					camera.stopPreview();// åœæ‰åŸæ¥æ‘„åƒå¤´çš„é¢„è§ˆ
+					camera.release();// é‡Šæ”¾èµ„æº
+					camera = null;// å–æ¶ˆåŸæ¥æ‘„åƒå¤´
+					camera = Camera.open(i);// æ‰“å¼€å½“å‰é€‰ä¸­çš„æ‘„åƒå¤´
 					try {
 						helper.resetCameraParam(camera);
-						camera.setPreviewDisplay(surfaceHolder);// Í¨¹ısurfaceviewÏÔÊ¾È¡¾°»­Ãæ
-						camera.startPreview();// ¿ªÊ¼Ô¤ÀÀ
+						camera.setPreviewDisplay(surfaceHolder);// é€šè¿‡surfaceviewæ˜¾ç¤ºå–æ™¯ç”»é¢
+						camera.startPreview();// å¼€å§‹é¢„è§ˆ
 						cameraPosition = 1;
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -269,11 +263,11 @@ public class VideoActivity extends Activity implements 	SurfaceHolder.Callback,O
 			}
 		}
 	}
-	
-	//------------------------------surface viewµÄ»Øµ÷º¯Êı-----------------------------------		
+
+	//------------------------------surface viewçš„å›è°ƒå‡½æ•°-----------------------------------
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
+							   int height) {
 		surfaceHolder = holder;
 	}
 	@SuppressLint("NewApi")
@@ -282,13 +276,13 @@ public class VideoActivity extends Activity implements 	SurfaceHolder.Callback,O
 		surfaceHolder = holder;
 		try {
 			if(isCameraBack){
-				camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);//´ò¿ªÉãÏñÍ·
+				camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);//æ‰“å¼€æ‘„åƒå¤´
 			}else{
-				camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);//´ò¿ªÉãÏñÍ·
+				camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);//æ‰“å¼€æ‘„åƒå¤´
 			}
-	    	helper.resetCameraParam(camera);
-	        camera.setPreviewDisplay(surfaceHolder);//Í¨¹ısurfaceviewÏÔÊ¾È¡¾°»­Ãæ
-	        camera.startPreview();//¿ªÊ¼Ô¤ÀÀ
+			helper.resetCameraParam(camera);
+			camera.setPreviewDisplay(surfaceHolder);//é€šè¿‡surfaceviewæ˜¾ç¤ºå–æ™¯ç”»é¢
+			camera.startPreview();//å¼€å§‹é¢„è§ˆ
 		}catch(Exception e){
 		}
 	}
@@ -306,8 +300,8 @@ public class VideoActivity extends Activity implements 	SurfaceHolder.Callback,O
 			mediarecorder=null;
 		}
 	}
-	
-	
+
+
 	private Handler handler=new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
@@ -320,10 +314,5 @@ public class VideoActivity extends Activity implements 	SurfaceHolder.Callback,O
 				text_count.setText(CommUtils.getTimeFormat(count));
 			}
 		}
-		};
-		
-		
-		
-		
-		
+	};
 }
